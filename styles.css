@@ -28,14 +28,14 @@
     --info-color: var(--gray-600);
     --info-hover: var(--gray-700);
     
-    /* Cores neutras */
-    --bg-primary: #ffffff;
-    --bg-secondary: var(--gray-100);
-    --bg-tertiary: var(--gray-200);
-    --text-primary: var(--gray-900);
-    --text-secondary: var(--gray-600);
+    /* Cores neutras - tema escuro */
+    --bg-primary: var(--gray-900);
+    --bg-secondary: var(--gray-800);
+    --bg-tertiary: var(--gray-700);
+    --text-primary: var(--gray-200);
+    --text-secondary: var(--gray-400);
     --text-muted: var(--gray-500);
-    --border-color: var(--gray-300);
+    --border-color: var(--gray-700);
     
     /* Sombras sutis */
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -74,10 +74,11 @@ body {
     margin: 0 auto;
     background: var(--bg-primary);
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     padding: 20px;
     animation: fadeIn 0.4s ease-out;
     position: relative;
+    border: 1px solid var(--gray-800);
 }
 
 @keyframes fadeIn {
@@ -104,7 +105,7 @@ header {
 header h1 {
     font-size: 1.75rem;
     font-weight: 700;
-    color: var(--gray-800);
+    color: var(--text-primary);
     margin-bottom: 4px;
     letter-spacing: -0.5px;
 }
@@ -136,14 +137,15 @@ header h1 {
     border: 1.5px solid var(--border-color);
     border-radius: var(--radius-md);
     transition: all var(--transition-base);
-    background: var(--bg-primary);
+    background: var(--bg-secondary);
     color: var(--text-primary);
 }
 
 .url-input:focus {
     outline: none;
     border-color: var(--gray-500);
-    box-shadow: 0 0 0 3px rgba(107, 114, 128, 0.1);
+    box-shadow: 0 0 0 3px rgba(107, 114, 128, 0.2);
+    background: var(--bg-tertiary);
 }
 
 .url-input::placeholder {
@@ -188,16 +190,16 @@ header h1 {
 
 .btn-primary {
     background: var(--gray-700);
-    color: white;
+    color: var(--text-primary);
 }
 
 .btn-primary:hover:not(:disabled) {
-    background: var(--gray-800);
+    background: var(--gray-600);
 }
 
 .btn-success {
     background: var(--success-color);
-    color: white;
+    color: var(--text-primary);
 }
 
 .btn-success:hover:not(:disabled) {
@@ -206,7 +208,7 @@ header h1 {
 
 .btn-danger {
     background: var(--danger-color);
-    color: white;
+    color: var(--text-primary);
 }
 
 .btn-danger:hover:not(:disabled) {
@@ -261,7 +263,7 @@ header h1 {
 .time-display {
     font-size: 1rem;
     font-weight: 600;
-    color: var(--gray-700);
+    color: var(--text-primary);
     white-space: nowrap;
     display: flex;
     align-items: center;
@@ -281,13 +283,13 @@ header h1 {
 
 .editable-time:hover {
     background: var(--bg-tertiary);
-    color: var(--gray-800);
+    color: var(--text-primary);
 }
 
 .editable-time:focus {
     outline: 2px solid var(--gray-500);
     outline-offset: 2px;
-    background: white;
+    background: var(--bg-tertiary);
     color: var(--text-primary);
 }
 
@@ -333,17 +335,20 @@ header h1 {
 
 .btn-point-a {
     background: var(--gray-600);
-    color: white;
+    color: var(--text-primary);
+    border-color: var(--gray-600);
 }
 
 .btn-point-b {
     background: var(--gray-500);
-    color: white;
+    color: var(--text-primary);
+    border-color: var(--gray-500);
 }
 
 .btn-point:hover {
     transform: scale(1.05);
     background: var(--gray-700);
+    border-color: var(--gray-700);
 }
 
 .btn-point:active {
@@ -361,7 +366,7 @@ header h1 {
 }
 
 .point-time-display.active {
-    color: var(--gray-700);
+    color: var(--text-primary);
     font-weight: 600;
 }
 
@@ -381,7 +386,7 @@ header h1 {
     padding: 4px 8px;
     border-radius: var(--radius-sm);
     border: 1px solid var(--border-color);
-    background: var(--bg-primary);
+    background: var(--bg-secondary);
     color: var(--text-primary);
     cursor: pointer;
     transition: all var(--transition-fast);
@@ -395,24 +400,24 @@ header h1 {
 
 .btn-control-time:hover {
     background: var(--bg-tertiary);
-    border-color: var(--gray-400);
+    border-color: var(--gray-500);
 }
 
 .btn-control-time:active {
-    background: var(--gray-200);
+    background: var(--gray-600);
     transform: scale(0.98);
 }
 
 .btn-control-time.btn-play {
     min-width: 36px;
     background: var(--gray-700);
-    color: white;
+    color: var(--text-primary);
     border-color: var(--gray-700);
 }
 
 .btn-control-time.btn-play:hover {
-    background: var(--gray-800);
-    border-color: var(--gray-800);
+    background: var(--gray-600);
+    border-color: var(--gray-600);
 }
 
 .control-number {
@@ -435,7 +440,7 @@ header h1 {
    ============================================ */
 .status-info {
     padding: 10px 14px;
-    background: var(--gray-100);
+    background: var(--bg-secondary);
     border-radius: var(--radius-md);
     border-left: 3px solid var(--gray-500);
     margin-top: 8px;
@@ -448,16 +453,16 @@ header h1 {
 }
 
 .status-message.looping {
-    color: var(--gray-700);
+    color: var(--text-primary);
     font-weight: 600;
 }
 
 .error-message {
-    background: var(--gray-100);
-    color: var(--gray-800);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
     padding: 12px 16px;
     border-radius: var(--radius-md);
-    border-left: 3px solid var(--gray-600);
+    border-left: 3px solid var(--gray-500);
     margin-top: 12px;
     font-size: 0.875rem;
 }
