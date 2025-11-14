@@ -76,12 +76,25 @@ function onPlayerReady(event) {
     console.log('Player pronto');
     updateTimeDisplay();
     setInterval(updateTimeDisplay, 100);
+    
+    // Configurar edição de tempo
+    const currentTimeEl = document.getElementById('current-time');
+    const totalTimeEl = document.getElementById('total-time');
+    handleTimeEdit(currentTimeEl, true);
+    handleTimeEdit(totalTimeEl, false);
 }
 
 // Quando o estado do player mudar
 function onPlayerStateChange(event) {
-    if (event.data === YT.PlayerState.PLAYING && isLooping) {
-        checkLoop();
+    const playBtn = document.getElementById('play-pause');
+    
+    if (event.data === YT.PlayerState.PLAYING) {
+        if (playBtn) playBtn.textContent = '⏸️';
+        if (isLooping) {
+            checkLoop();
+        }
+    } else if (event.data === YT.PlayerState.PAUSED) {
+        if (playBtn) playBtn.textContent = '▶️';
     }
 }
 
@@ -159,12 +172,70 @@ function setPointB() {
 function updatePointDisplay(elementId, time) {
     const element = document.getElementById(elementId);
     if (time !== null) {
-        element.textContent = `(${formatTime(time)})`;
+        element.textContent = formatTime(time);
         element.classList.add('active');
     } else {
         element.textContent = '';
         element.classList.remove('active');
     }
+}
+
+// Converter tempo MM:SS para segundos
+function parseTime(timeString) {
+    const parts = timeString.trim().split(':');
+    if (parts.length === 2) {
+        const minutes = parseInt(parts[0], 10);
+        const seconds = parseInt(parts[1], 10);
+        if (!isNaN(minutes) && !isNaN(seconds) && minutes >= 0 && seconds >= 0 && seconds < 60) {
+            return minutes * 60 + seconds;
+        }
+    }
+    return null;
+}
+
+// Editar tempo manualmente
+function handleTimeEdit(element, isCurrentTime) {
+    if (!element) return;
+    
+    element.addEventListener('blur', function() {
+        const timeString = this.textContent.trim();
+        const seconds = parseTime(timeString);
+        
+        if (seconds !== null && player) {
+            try {
+                const duration = player.getDuration();
+                if (isCurrentTime) {
+                    // Editar tempo atual - mover para esse tempo
+                    const newTime = Math.min(seconds, duration);
+                    player.seekTo(newTime, true);
+                    element.textContent = formatTime(newTime);
+                } else {
+                    // Editar tempo total - apenas atualizar display (não pode mudar duração)
+                    element.textContent = formatTime(duration);
+                }
+            } catch (e) {
+                showError('Erro ao editar tempo');
+            }
+        } else if (timeString && timeString !== this.textContent) {
+            // Restaurar texto original se inválido
+            showError('Formato inválido. Use MM:SS (ex: 1:30)');
+            updateTimeDisplay();
+        }
+    });
+    
+    element.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            this.blur();
+        }
+    });
+    
+    // Prevenir edição acidental
+    element.addEventListener('click', function() {
+        if (this.contentEditable === 'true') {
+            this.focus();
+        }
+    });
 }
 
 // Verificar se ambos os pontos estão definidos
@@ -279,6 +350,25 @@ function restart() {
     }
 }
 
+// Play/Pause
+function togglePlayPause() {
+    if (!player) return;
+    try {
+        const state = player.getPlayerState();
+        const playBtn = document.getElementById('play-pause');
+        
+        if (state === YT.PlayerState.PLAYING) {
+            player.pauseVideo();
+            playBtn.textContent = '▶️';
+        } else {
+            player.playVideo();
+            playBtn.textContent = '⏸️';
+        }
+    } catch (e) {
+        showError('Erro ao controlar reprodução');
+    }
+}
+
 // Retroceder 5 segundos
 function rewind5() {
     if (!player) return;
@@ -368,6 +458,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('clear-points').addEventListener('click', clearPoints);
 
     // Controles de reprodução
+    const playPauseBtn = document.getElementById('play-pause');
+    if (playPauseBtn) {
+        playPauseBtn.addEventListener('click', togglePlayPause);
+    }
     document.getElementById('restart').addEventListener('click', restart);
     document.getElementById('rewind-10').addEventListener('click', rewind10);
     document.getElementById('rewind-5').addEventListener('click', rewind5);
