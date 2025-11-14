@@ -8,6 +8,14 @@ let loopInterval = null;
 // Inicializar YouTube IFrame API
 function onYouTubeIframeAPIReady() {
     console.log('YouTube IFrame API está pronta');
+    
+    // Carregar vídeo padrão automaticamente
+    const defaultUrl = document.getElementById('youtube-url').value;
+    if (defaultUrl && defaultUrl.trim()) {
+        setTimeout(() => {
+            loadVideo();
+        }, 300);
+    }
 }
 
 // Extrair ID do vídeo da URL
