@@ -1,0 +1,17 @@
+{
+  "name": "youtube-looper",
+  "version": "1.0.0",
+  "description": "Player de YouTube com controles de loop personalizado",
+  "scripts": {
+    "start": "npx http-server -p 3000"
+  },
+  "keywords": [
+    "youtube",
+    "player",
+    "loop",
+    "music"
+  ],
+  "author": "",
+  "license": "MIT"
+}
+

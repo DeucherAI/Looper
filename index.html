@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Player de YouTube com controles de loop personalizado">
+    <meta name="theme-color" content="#764ba2">
+    <title>YouTube Looper</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎵 YouTube Looper</h1>
+            <p class="subtitle">Controle total sobre seus vídeos do YouTube</p>
+        </header>
+
+        <div class="url-section">
+            <div class="input-group">
+                <input 
+                    type="text" 
+                    id="youtube-url" 
+                    placeholder="Cole a URL do vídeo do YouTube aqui..."
+                    class="url-input"
+                >
+                <button id="load-video" class="btn btn-primary">Carregar Vídeo</button>
+            </div>
+        </div>
+
+        <div id="video-container" class="video-container" style="display: none;">
+            <div id="player"></div>
+        </div>
+
+        <div id="controls-section" class="controls-section" style="display: none;">
+            <div class="time-display">
+                <span id="current-time">00:00</span>
+                <span class="separator">/</span>
+                <span id="total-time">00:00</span>
+            </div>
+
+            <div class="loop-controls">
+                <h3>Controles de Loop</h3>
+                <div class="loop-buttons">
+                    <button id="set-point-a" class="btn btn-secondary">
+                        Definir Ponto A
+                        <span id="point-a-display" class="point-display"></span>
+                    </button>
+                    <button id="set-point-b" class="btn btn-secondary">
+                        Definir Ponto B
+                        <span id="point-b-display" class="point-display"></span>
+                    </button>
+                    <button id="toggle-loop" class="btn btn-success" disabled>
+                        Iniciar Loop
+                    </button>
+                    <button id="clear-points" class="btn btn-danger">
+                        Limpar Pontos
+                    </button>
+                </div>
+            </div>
+
+            <div class="playback-controls">
+                <h3>Controles de Reprodução</h3>
+                <div class="control-buttons">
+                    <button id="restart" class="btn btn-control">
+                        ⏮️ Recomeçar
+                    </button>
+                    <button id="rewind-10" class="btn btn-control">
+                        ⏪ -10s
+                    </button>
+                    <button id="rewind-5" class="btn btn-control">
+                        ⏪ -5s
+                    </button>
+                    <button id="forward-5" class="btn btn-control">
+                        +5s ⏩
+                    </button>
+                    <button id="forward-10" class="btn btn-control">
+                        +10s ⏩
+                    </button>
+                </div>
+            </div>
+
+            <div class="status-info">
+                <div id="loop-status" class="status-message"></div>
+            </div>
+        </div>
+
+        <div id="error-message" class="error-message" style="display: none;"></div>
+    </div>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="app.js"></script>
+</body>
+</html>
+
