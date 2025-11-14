@@ -82,6 +82,12 @@ function onPlayerReady(event) {
     const totalTimeEl = document.getElementById('total-time');
     handleTimeEdit(currentTimeEl, true);
     handleTimeEdit(totalTimeEl, false);
+    
+    // Configurar edição dos pontos A e B
+    const pointAEl = document.getElementById('point-a-display');
+    const pointBEl = document.getElementById('point-b-display');
+    handlePointTimeEdit(pointAEl, 'A');
+    handlePointTimeEdit(pointBEl, 'B');
 }
 
 // Quando o estado do player mudar
@@ -234,6 +240,54 @@ function handleTimeEdit(element, isCurrentTime) {
     element.addEventListener('click', function() {
         if (this.contentEditable === 'true') {
             this.focus();
+        }
+    });
+}
+
+// Editar tempo dos pontos A e B
+function handlePointTimeEdit(element, pointName) {
+    if (!element) return;
+    
+    element.addEventListener('blur', function() {
+        const timeString = this.textContent.trim();
+        const seconds = parseTime(timeString);
+        
+        if (seconds !== null && player) {
+            try {
+                const duration = player.getDuration();
+                const newTime = Math.min(Math.max(0, seconds), duration);
+                
+                if (pointName === 'A') {
+                    pointA = newTime;
+                } else {
+                    pointB = newTime;
+                }
+                
+                element.textContent = formatTime(newTime);
+                element.classList.add('active');
+                checkPoints();
+            } catch (e) {
+                showError('Erro ao editar tempo do ponto ' + pointName);
+            }
+        } else if (timeString) {
+            // Restaurar tempo original se inválido
+            if (pointName === 'A' && pointA !== null) {
+                element.textContent = formatTime(pointA);
+            } else if (pointName === 'B' && pointB !== null) {
+                element.textContent = formatTime(pointB);
+            } else {
+                element.textContent = '';
+            }
+            if (timeString !== element.textContent) {
+                showError('Formato inválido. Use MM:SS (ex: 1:30)');
+            }
+        }
+    });
+    
+    element.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            this.blur();
         }
     });
 }

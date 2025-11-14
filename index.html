@@ -33,53 +33,37 @@
         </div>
 
         <div id="controls-section" class="controls-section" style="display: none;">
-            <div class="time-display">
-                <span id="current-time" class="editable-time" contenteditable="true" title="Clique para editar">00:00</span>
-                <span class="separator">/</span>
-                <span id="total-time" class="editable-time" contenteditable="true" title="Clique para editar">00:00</span>
-            </div>
+            <div class="controls-row">
+                <div class="time-display">
+                    <span id="current-time" class="editable-time" contenteditable="true" title="Clique para editar">00:00</span>
+                    <span class="separator">/</span>
+                    <span id="total-time" class="editable-time" contenteditable="true" title="Clique para editar">00:00</span>
+                </div>
 
-            <div class="loop-controls">
-                <h3>Controles de Loop</h3>
-                <div class="loop-buttons">
+                <div class="point-controls">
                     <div class="point-button-group">
                         <button id="set-point-a" class="btn-point btn-point-a" title="Definir Ponto A">A</button>
-                        <span id="point-a-display" class="point-time-display"></span>
+                        <span id="point-a-display" class="point-time-display editable-time" contenteditable="true" title="Clique para editar tempo"></span>
                     </div>
                     <div class="point-button-group">
                         <button id="set-point-b" class="btn-point btn-point-b" title="Definir Ponto B">B</button>
-                        <span id="point-b-display" class="point-time-display"></span>
+                        <span id="point-b-display" class="point-time-display editable-time" contenteditable="true" title="Clique para editar tempo"></span>
                     </div>
-                    <button id="toggle-loop" class="btn btn-success" disabled>
-                        Iniciar Loop
+                    <button id="toggle-loop" class="btn btn-success btn-small" disabled>
+                        Loop
                     </button>
-                    <button id="clear-points" class="btn btn-danger">
-                        Limpar Pontos
+                    <button id="clear-points" class="btn btn-danger btn-small">
+                        Limpar
                     </button>
                 </div>
-            </div>
 
-            <div class="playback-controls">
-                <h3>Controles de Reprodução</h3>
-                <div class="control-buttons">
-                    <button id="rewind-10" class="btn-icon" title="Retroceder 10 segundos">
-                        ⏪⏪⏪
-                    </button>
-                    <button id="rewind-5" class="btn-icon" title="Retroceder 5 segundos">
-                        ⏪⏪
-                    </button>
-                    <button id="play-pause" class="btn-icon btn-play" title="Play/Pause">
-                        ▶️
-                    </button>
-                    <button id="forward-5" class="btn-icon" title="Avançar 5 segundos">
-                        ⏩⏩
-                    </button>
-                    <button id="forward-10" class="btn-icon" title="Avançar 10 segundos">
-                        ⏩⏩⏩
-                    </button>
-                    <button id="restart" class="btn-icon" title="Recomeçar">
-                        ⏮️
-                    </button>
+                <div class="playback-controls-inline">
+                    <button id="rewind-10" class="btn-icon" title="Retroceder 10 segundos">⏪⏪⏪</button>
+                    <button id="rewind-5" class="btn-icon" title="Retroceder 5 segundos">⏪⏪</button>
+                    <button id="play-pause" class="btn-icon btn-play" title="Play/Pause">▶️</button>
+                    <button id="forward-5" class="btn-icon" title="Avançar 5 segundos">⏩⏩</button>
+                    <button id="forward-10" class="btn-icon" title="Avançar 10 segundos">⏩⏩⏩</button>
+                    <button id="restart" class="btn-icon" title="Recomeçar">⏮️</button>
                 </div>
             </div>
 
